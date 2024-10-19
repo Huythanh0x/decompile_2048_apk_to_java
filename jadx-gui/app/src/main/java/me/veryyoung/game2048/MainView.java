@@ -12,6 +12,7 @@ import android.support.v4.media.TransportMediator;
 import android.view.View;
 import java.util.ArrayList;
 import java.util.Iterator;
+import me.veryyoung.game2048.R;
 
 /* loaded from: classes.dex */
 public class MainView extends View {
@@ -196,131 +197,125 @@ public class MainView extends View {
         drawDrawable(canvas, this.backgroundRectangle, this.startingX, this.startingY, this.endingX, this.endingY);
     }
 
-    private void drawBackgroundGrid(Canvas canvas) {
-        int i = 0;
+    private void drawBackgroundGrid(final Canvas canvas) {
+        int n = 0;
         while (true) {
             this.game.getClass();
-            if (i >= 4) {
-                return;
+            if (n >= 4) {
+                break;
             }
-            int i2 = 0;
+            int n2 = 0;
             while (true) {
                 this.game.getClass();
-                if (i2 < 4) {
-                    int i3 = this.startingX + this.gridWidth + ((this.cellSize + this.gridWidth) * i);
-                    int i4 = i3 + this.cellSize;
-                    int i5 = this.startingY + this.gridWidth + ((this.cellSize + this.gridWidth) * i2);
-                    drawDrawable(canvas, this.cellRectangle[0], i3, i5, i4, i5 + this.cellSize);
-                    i2++;
+                if (n2 >= 4) {
+                    break;
                 }
+                final int n3 = this.startingX + this.gridWidth + (this.cellSize + this.gridWidth) * n;
+                final int cellSize = this.cellSize;
+                final int n4 = this.startingY + this.gridWidth + (this.cellSize + this.gridWidth) * n2;
+                this.drawDrawable(canvas, this.cellRectangle[0], n3, n4, n3 + cellSize, n4 + this.cellSize);
+                ++n2;
             }
-            //todo fix unreachable code
-            i++;
+            ++n;
         }
     }
 
-    private void drawCells(Canvas canvas) {
-        int i;
-        int i2;
-        int i3;
-        int i4;
-        Tile tile;
+    private void drawCells(final Canvas canvas) {
         this.paint.setTextSize(this.textSize);
         this.paint.setTextAlign(Paint.Align.CENTER);
-        int i5 = 0;
+        int n = 0;
         while (true) {
             this.game.getClass();
-            int i6 = 4;
-            if (i5 >= 4) {
-                return;
+            if (n >= 4) {
+                break;
             }
-            int i7 = 0;
+            int n2 = 0;
             while (true) {
                 this.game.getClass();
-                if (i7 < i6) {
-                    int i8 = this.startingX + this.gridWidth + ((this.cellSize + this.gridWidth) * i5);
-                    int i9 = this.cellSize + i8;
-                    int i10 = this.startingY + this.gridWidth + ((this.cellSize + this.gridWidth) * i7);
-                    int i11 = this.cellSize + i10;
-                    Tile cellContent = this.game.grid.getCellContent(i5, i7);
-                    if (cellContent != null) {
-                        int log2 = log2(cellContent.getValue());
-                        ArrayList<AnimationCell> animationCell = this.game.aGrid.getAnimationCell(i5, i7);
-                        int size = animationCell.size() - 1;
-                        boolean z = false;
-                        while (size >= 0) {
-                            AnimationCell animationCell2 = animationCell.get(size);
-                            if (animationCell2.getAnimationType() == -1) {
-                                z = true;
-                            }
-                            if (animationCell2.isActive()) {
-                                if (animationCell2.getAnimationType() == -1) {
-                                    i3 = i5;
-                                    float percentageDone = (float) animationCell2.getPercentageDone();
-                                    this.paint.setTextSize(this.textSize * percentageDone);
-                                    float f = (this.cellSize / 2) * (1.0f - percentageDone);
-                                    i4 = i7;
-                                    this.bitmapCell[log2].setBounds((int) (i8 + f), (int) (i10 + f), (int) (i9 - f), (int) (i11 - f));
-                                    this.bitmapCell[log2].draw(canvas);
-                                } else {
-                                    i3 = i5;
-                                    i4 = i7;
-                                    if (animationCell2.getAnimationType() == 1) {
-                                        double percentageDone2 = animationCell2.getPercentageDone();
-                                        float f2 = (float) ((0.375d * percentageDone2) + 1.0d + ((((-0.5d) * percentageDone2) * percentageDone2) / 2.0d));
-                                        this.paint.setTextSize(this.textSize * f2);
-                                        float f3 = (this.cellSize / 2) * (1.0f - f2);
-                                        this.bitmapCell[log2].setBounds((int) (i8 + f3), (int) (i10 + f3), (int) (i9 - f3), (int) (i11 - f3));
-                                        this.bitmapCell[log2].draw(canvas);
-                                    } else if (animationCell2.getAnimationType() == 0) {
-                                        double percentageDone3 = animationCell2.getPercentageDone();
-                                        int i12 = animationCell.size() >= 2 ? log2 - 1 : log2;
-                                        int i13 = animationCell2.extras[0];
-                                        int i14 = animationCell2.extras[1];
-                                        int x = cellContent.getX();
-                                        int y = cellContent.getY();
-                                        tile = cellContent;
-                                        double d = (x - i13) * (this.cellSize + this.gridWidth);
-                                        double d2 = percentageDone3 - 1.0d;
-                                        Double.isNaN(d);
-                                        int i15 = (int) (d * d2 * 1.0d);
-                                        double d3 = (this.cellSize + this.gridWidth) * (y - i14);
-                                        Double.isNaN(d3);
-                                        int i16 = (int) (d3 * d2 * 1.0d);
-                                        this.bitmapCell[i12].setBounds(i8 + i15, i10 + i16, i15 + i9, i16 + i11);
-                                        this.bitmapCell[i12].draw(canvas);
-                                        z = true;
-                                    }
-                                }
-                                tile = cellContent;
-                                z = true;
-                            } else {
-                                i3 = i5;
-                                i4 = i7;
-                                tile = cellContent;
-                            }
-                            size--;
-                            i5 = i3;
-                            i7 = i4;
-                            cellContent = tile;
-                        }
-                        i = i5;
-                        i2 = i7;
-                        if (!z) {
-                            this.bitmapCell[log2].setBounds(i8, i10, i9, i11);
-                            this.bitmapCell[log2].draw(canvas);
-                        }
-                    } else {
-                        i = i5;
-                        i2 = i7;
-                    }
-                    i7 = i2 + 1;
-                    i5 = i;
-                    i6 = 4;
+                if (n2 >= 4) {
+                    break;
                 }
+                final int n3 = this.startingX + this.gridWidth + (this.cellSize + this.gridWidth) * n;
+                final int n4 = this.cellSize + n3;
+                final int n5 = this.startingY + this.gridWidth + (this.cellSize + this.gridWidth) * n2;
+                final int n6 = this.cellSize + n5;
+                final Tile cellContent = this.game.grid.getCellContent(n, n2);
+                int n19;
+                int n20;
+                if (cellContent != null) {
+                    final int log2 = log2(cellContent.getValue());
+                    final ArrayList animationCell = this.game.aGrid.getAnimationCell(n, n2);
+                    int i = animationCell.size() - 1;
+                    boolean b = false;
+                    while (i >= 0) {
+                        final AnimationCell animationCell2 = (AnimationCell) animationCell.get(i);
+                        if (animationCell2.getAnimationType() == -1) {
+                            b = true;
+                        }
+                        if (animationCell2.isActive()) {
+                            if (animationCell2.getAnimationType() == -1) {
+                                final float n7 = (float)animationCell2.getPercentageDone();
+                                this.paint.setTextSize(this.textSize * n7);
+                                final float n8 = this.cellSize / 2 * (1.0f - n7);
+                                this.bitmapCell[log2].setBounds((int)(n3 + n8), (int)(n5 + n8), (int)(n4 - n8), (int)(n6 - n8));
+                                this.bitmapCell[log2].draw(canvas);
+                            }
+                            else if (animationCell2.getAnimationType() == 1) {
+                                final double percentageDone = animationCell2.getPercentageDone();
+                                final float n9 = (float)(0.375 * percentageDone + 1.0 + -0.5 * percentageDone * percentageDone / 2.0);
+                                this.paint.setTextSize(this.textSize * n9);
+                                final float n10 = this.cellSize / 2 * (1.0f - n9);
+                                this.bitmapCell[log2].setBounds((int)(n3 + n10), (int)(n5 + n10), (int)(n4 - n10), (int)(n6 - n10));
+                                this.bitmapCell[log2].draw(canvas);
+                            }
+                            else if (animationCell2.getAnimationType() == 0) {
+                                final double percentageDone2 = animationCell2.getPercentageDone();
+                                int n11;
+                                if (animationCell.size() >= 2) {
+                                    n11 = log2 - 1;
+                                }
+                                else {
+                                    n11 = log2;
+                                }
+                                final int n12 = animationCell2.extras[0];
+                                final int n13 = animationCell2.extras[1];
+                                final int x = cellContent.getX();
+                                final int y = cellContent.getY();
+                                final double v = (x - n12) * (this.cellSize + this.gridWidth);
+                                final double n14 = percentageDone2 - 1.0;
+                                Double.isNaN(v);
+                                final int n15 = (int)(v * n14 * 1.0);
+                                final double v2 = (this.cellSize + this.gridWidth) * (y - n13);
+                                Double.isNaN(v2);
+                                final int n16 = (int)(v2 * n14 * 1.0);
+                                this.bitmapCell[n11].setBounds(n3 + n15, n5 + n16, n15 + n4, n16 + n6);
+                                this.bitmapCell[n11].draw(canvas);
+                            }
+                            b = true;
+                        }
+                        --i;
+                    }
+                    final int n17 = n;
+                    final int n18 = n2;
+                    n19 = n17;
+                    n20 = n18;
+                    if (!b) {
+                        this.bitmapCell[log2].setBounds(n3, n5, n4, n6);
+                        this.bitmapCell[log2].draw(canvas);
+                        n19 = n17;
+                        n20 = n18;
+                    }
+                }
+                else {
+                    final int n21 = n;
+                    n20 = n2;
+                    n19 = n21;
+                }
+                final int n22 = n20 + 1;
+                n = n19;
+                n2 = n22;
             }
-            //todo fix unreachable code
-            i5++;
+            ++n;
         }
     }
 
@@ -366,6 +361,7 @@ public class MainView extends View {
         int i4 = i2 / 2;
         if (z) {
             this.lightUpRectangle.setAlpha(TransportMediator.KEYCODE_MEDIA_PAUSE);
+            int n5 = (this.endingY - this.startingY) / 2 - this.centerText();
             drawDrawable(canvas, this.lightUpRectangle, 0, 0, i, i2);
             this.lightUpRectangle.setAlpha(255);
             this.paint.setColor(this.TEXT_WHITE);
@@ -375,8 +371,8 @@ public class MainView extends View {
             float f = i3;
             canvas.drawText(this.winText, f, i4 - centerText(), this.paint);
             this.paint.setTextSize(this.bodyTextSize);
-            //todo fix this undefine variable `r1`
-            canvas.drawText(z2 ? this.continueText : this.forNowText, f, (r1 + (this.textPaddingSize * 2)) - (centerText() * 2), this.paint);
+            //thanh0x fix this undefine variable `r1`
+            canvas.drawText(z2 ? this.continueText : this.forNowText, f, (n5 + (this.textPaddingSize * 2)) - (centerText() * 2), this.paint);
             return;
         }
         this.fadeRectangle.setAlpha(TransportMediator.KEYCODE_MEDIA_PAUSE);
@@ -457,11 +453,11 @@ public class MainView extends View {
         this.cellTextSize = this.textSize * 0.9f;
         this.titleTextSize = this.textSize / 3.0f;
         Double.isNaN(this.textSize);
-        //todo fix this undefine variable `r2`
-        this.bodyTextSize = (int) (r2 / 1.5d);
+        //thanh0x: fix this undefine variable `r2`
+        this.bodyTextSize = (int) (this.textSize / 1.5d);
         Double.isNaN(this.textSize);
-        //todo fix this undefine variable `r2`
-        this.instructionsTextSize = (int) (r2 / 1.8d);
+        //thanh0x: fix this undefine variable `r3`
+        this.instructionsTextSize = (int) (this.textSize / 1.8d);
         this.headerTextSize = this.textSize * 2.0f;
         this.gameOverTextSize = this.textSize * 2.0f;
         this.textPaddingSize = (int) (this.textSize / 3.0f);
