@@ -5,6 +5,7 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
+    namespace 'me.veryyoung.game2048'
 
     defaultConfig {
         applicationId 'me.veryyoung.game2048'
