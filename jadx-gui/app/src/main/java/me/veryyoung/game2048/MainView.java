@@ -214,6 +214,7 @@ public class MainView extends View {
                     i2++;
                 }
             }
+            //todo fix unreachable code
             i++;
         }
     }
@@ -318,6 +319,7 @@ public class MainView extends View {
                     i6 = 4;
                 }
             }
+            //todo fix unreachable code
             i5++;
         }
     }
@@ -373,6 +375,7 @@ public class MainView extends View {
             float f = i3;
             canvas.drawText(this.winText, f, i4 - centerText(), this.paint);
             this.paint.setTextSize(this.bodyTextSize);
+            //todo fix this undefine variable `r1`
             canvas.drawText(z2 ? this.continueText : this.forNowText, f, (r1 + (this.textPaddingSize * 2)) - (centerText() * 2), this.paint);
             return;
         }
@@ -454,8 +457,10 @@ public class MainView extends View {
         this.cellTextSize = this.textSize * 0.9f;
         this.titleTextSize = this.textSize / 3.0f;
         Double.isNaN(this.textSize);
+        //todo fix this undefine variable `r2`
         this.bodyTextSize = (int) (r2 / 1.5d);
         Double.isNaN(this.textSize);
+        //todo fix this undefine variable `r2`
         this.instructionsTextSize = (int) (r2 / 1.8d);
         this.headerTextSize = this.textSize * 2.0f;
         this.gameOverTextSize = this.textSize * 2.0f;

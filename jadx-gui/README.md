@@ -12,3 +12,8 @@ Add `gradle.properties` file to define some extra configuration for gradle build
 
 ### Failed to fetch namespace: Affected Modules: app
 Add name space to `android` block at `build.gradle` file.
+
+### Fix compiler error
+1. Copy some error code from real Jadx-gui. Some code broken due to exportation.
+2. Fix some error code manually: constant value instead of raw value
+3. Note todo for all error that cannot fix by jadx decompiler: missing variable, `UnsupportedOperationException`
